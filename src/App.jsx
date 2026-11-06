@@ -82,7 +82,7 @@ const TEAM = [
   { name: 'Reg', role: 'Medtech', who: 'carla', mood: 'calm', pose: 'clipboard', text: 'Guides you through check-ups, X-ray, ultrasound and ECG.' },
 ];
 
-const HEADLINE = 'Clear answers for your health, right here in Graceville.';
+const HEADLINE = 'Clear answers for your health, right here in Bulacan.';
 
 const peso = (n) => '₱' + n.toLocaleString('en-PH');
 
@@ -622,7 +622,7 @@ export default function App() {
                   </h1>
 
                   <p className="hero-sub max-w-[520px] text-lg leading-relaxed text-[#3d4b63] sm:text-[19px]">
-                    Laboratory tests, X-ray, ultrasound and ECG, check-ups and pre-employment medicals — plus home blood extraction when you can't come to us.
+                    Clarity is a diagnostic clinic and laboratory in San Jose del Monte, Bulacan — lab tests, X-ray, ultrasound and ECG, check-ups and pre-employment medicals, plus home blood extraction when you can't come to us.
                   </p>
 
                   <div className="hero-cta flex flex-wrap gap-3">
@@ -695,7 +695,7 @@ export default function App() {
             <div className="mb-12 flex flex-wrap items-end justify-between gap-8">
               <div data-reveal className="min-w-0 flex-[1_1_520px]">
                 <div className={EYEBROW}>OUR SERVICES</div>
-                <h2 className={`${H2} mt-2`}>Everything you need for a check-up, in one stop</h2>
+                <h2 className={`${H2} mt-2`}>Your one-stop diagnostic clinic in Bulacan</h2>
               </div>
               <div className="flex min-w-0 flex-[1_1_320px] items-end gap-2 lg:flex-[0_1_420px]">
                 <Bubble tail="right" className="mb-10 min-w-0 flex-1">Not sure which test you need? Message us and we'll guide you.</Bubble>
@@ -789,7 +789,7 @@ export default function App() {
             <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
               <div data-reveal className="min-w-0 flex-[1_1_520px]">
                 <div className={EYEBROW}>LABORATORY PRICE LIST</div>
-                <h2 className={`${H2} mt-2`}>Transparent prices, no surprises</h2>
+                <h2 className={`${H2} mt-2`}>Laboratory test prices, no surprises</h2>
               </div>
               <p data-reveal className="flex-[0_1_380px] text-base leading-relaxed text-[#3d4b63]">Pick a category to see each test and its price.</p>
             </div>
@@ -855,7 +855,7 @@ export default function App() {
             <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-6">
               <div data-reveal>
                 <div className={EYEBROW}>HOME SERVICE</div>
-                <h2 className={`${H2} mt-2`}>Blood extraction at home, in three easy steps</h2>
+                <h2 className={`${H2} mt-2`}>Home blood extraction in Bulacan, in three easy steps</h2>
               </div>
               <ol data-stagger className="grid gap-4 sm:grid-cols-3">
                 {[
@@ -914,7 +914,7 @@ export default function App() {
             <div data-reveal className="flex min-w-0 flex-[1_1_420px] flex-col gap-6">
               <div>
                 <div className={EYEBROW}>VISIT US</div>
-                <h2 className={`${H2} mt-2`}>In front of Grotto Church, Graceville</h2>
+                <h2 className={`${H2} mt-2`}>Visit our clinic in San Jose del Monte, Bulacan</h2>
               </div>
               <dl className="flex flex-col gap-4 text-base leading-relaxed">
                 <div><dt className="font-extrabold">Address</dt><dd>{CLINIC.address}</dd></div>
