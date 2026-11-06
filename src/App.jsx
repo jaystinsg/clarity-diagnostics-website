@@ -30,6 +30,9 @@ const CLINIC = {
     'Grotto Shop and Ride Bldg., Ground Floor, in front of Grotto Church, Graceville, San Jose del Monte, Bulacan',
   hours: 'Monday – Saturday, 6:00 AM – 4:00 PM',
   mapQuery: 'Grotto Shop and Ride, Graceville, San Jose del Monte, Bulacan',
+  // For a pin-exact route, replace the query with coordinates, e.g. destination=14.8139,121.0453 / ll=14.8139,121.0453
+  googleDrive: 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + encodeURIComponent('Grotto Shop and Ride, Graceville, San Jose del Monte, Bulacan'),
+  wazeDrive: 'https://waze.com/ul?navigate=yes&q=' + encodeURIComponent('Grotto Shop and Ride, Graceville, San Jose del Monte, Bulacan'),
 };
 
 const NAV = [
@@ -107,6 +110,7 @@ const ICON_PATHS = {
   chat: <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" />,
   check: <path d="M20 6 9 17l-5-5" />,
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
+  nav: <path d="M3 11 21 3l-8 18-2-8-8-2z" />,
   close: <path d="M6 6l12 12M18 6 6 18" />,
 };
 
@@ -365,8 +369,8 @@ export default function App() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Header + floating helper state (runs with or without reduced motion)
-      ScrollTrigger.create({ start: 40, end: 'max', onToggle: (s) => setScrolled(s.isActive) });
-      ScrollTrigger.create({ trigger: '#services', start: 'top 70%', end: 'max', onToggle: (s) => setShowHelper(s.isActive) });
+      ScrollTrigger.create({ start: 40, end: () => ScrollTrigger.maxScroll(window) + 10, onToggle: (s) => setScrolled(s.isActive) });
+      ScrollTrigger.create({ trigger: '#services', start: 'top 70%', end: () => ScrollTrigger.maxScroll(window) + 10, onToggle: (s) => setShowHelper(s.isActive) });
 
       const mm = gsap.matchMedia();
 
@@ -511,7 +515,6 @@ export default function App() {
   };
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(CLINIC.mapQuery)}&output=embed`;
-  const directions = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CLINIC.mapQuery)}`;
 
   return (
     <div ref={rootRef} id="top" className="min-h-screen overflow-x-clip bg-[#f4f8fc] font-[Nunito_Sans,system-ui,sans-serif] text-[#1c2b45] antialiased">
@@ -927,7 +930,20 @@ export default function App() {
               </dl>
               <div className="flex flex-wrap gap-3">
                 <a href={CLINIC.facebook} target="_blank" rel="noreferrer" data-magnetic className={`${BTN} bg-[#1e5bbf] text-white hover:bg-[#1a4fa6]`}>Facebook page</a>
-                <a href={directions} target="_blank" rel="noreferrer" data-magnetic className={`${BTN} border-2 border-[#c9d8ee] bg-white text-[#16336b] hover:border-[#1e5bbf]`}>Get directions</a>
+              </div>
+              <div className="flex flex-col gap-3 rounded-[24px] border border-[#e3ebf5] bg-white p-5 shadow-[0_6px_24px_-12px_rgba(22,51,107,0.2)]">
+                <div className="flex items-center gap-2 font-[Montserrat,sans-serif] text-base font-bold text-[#16336b]">
+                  <Icon name="pin" size={20} stroke="#1b6b56" /> Find us here
+                </div>
+                <p className="text-[15px] text-[#3d4b63]">Tap to start driving directions straight to the clinic.</p>
+                <div className="flex flex-wrap gap-3">
+                  <a href={CLINIC.googleDrive} target="_blank" rel="noreferrer" data-magnetic className={`${BTN} min-h-[48px] bg-[#16336b] px-6 text-[15px] text-white hover:bg-[#122b5a]`}>
+                    <Icon name="nav" size={18} /> Google Maps
+                  </a>
+                  <a href={CLINIC.wazeDrive} target="_blank" rel="noreferrer" data-magnetic className={`${BTN} min-h-[48px] bg-[#2bb3c0] px-6 text-[15px] text-[#0d2f33] hover:bg-[#25a1ad]`}>
+                    <Icon name="nav" size={18} /> Waze
+                  </a>
+                </div>
               </div>
             </div>
             <div data-reveal className="min-h-[380px] min-w-0 flex-[1_1_420px] overflow-hidden rounded-[32px] border border-[#e3ebf5] bg-[#dce8f6] shadow-[0_20px_50px_-24px_rgba(22,51,107,0.4)]">
@@ -953,8 +969,11 @@ export default function App() {
             ))}
           </nav>
         </div>
-        <div className="mx-auto max-w-[1200px] border-t border-white/15 px-5 pb-7 pt-5 text-[13px] text-[#aac1e3] sm:px-6">
-          © {new Date().getFullYear()} Clarity Diagnostic Inc. All rights reserved. Prices subject to change without prior notice.
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-white/15 px-5 pb-28 pt-5 text-[13px] text-[#aac1e3] sm:px-6">
+          <span>© {new Date().getFullYear()} Clarity Diagnostic Inc. All rights reserved. Prices subject to change without prior notice.</span>
+          <span>
+            Powered by <span className="font-extrabold tracking-wide text-white">JSG</span>
+          </span>
         </div>
       </footer>
 
