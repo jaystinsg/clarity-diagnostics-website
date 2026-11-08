@@ -40,6 +40,7 @@ const NAV = [
   { id: '#packages', label: 'Packages' },
   { id: '#prices', label: 'Price list' },
   { id: '#home-service', label: 'Home service' },
+  { id: '#faq', label: 'FAQ' },
   { id: '#contact', label: 'Contact' },
 ];
 
@@ -81,6 +82,35 @@ const TEAM = [
   { name: 'Cristina', role: 'Medtech', who: 'bea', mood: 'happy', pose: 'crossed', text: 'Welcomes you, answers questions and books your home service.' },
   { name: 'Reg', role: 'Medtech', who: 'carla', mood: 'calm', pose: 'clipboard', text: 'Guides you through check-ups, X-ray, ultrasound and ECG.' },
 ];
+
+const FAQS = [
+  {
+    q: 'Where is Clarity Diagnostics located?',
+    a: 'Clarity Diagnostics and Medical Services is at the Grotto Shop and Ride Bldg., Ground Floor, in front of Grotto Church, Graceville, San Jose del Monte, Bulacan. Tap Google Maps or Waze in the Visit Us section for driving directions.',
+  },
+  {
+    q: 'What are your clinic hours?',
+    a: 'We are open Monday to Saturday, 6:00 AM to 4:00 PM. Walk-ins are welcome.',
+  },
+  {
+    q: 'What medical and diagnostic services do you offer in Bulacan?',
+    a: 'We offer laboratory testing (hematology, blood chemistry, serology, thyroid, tumor markers, hepatitis, electrolytes and more), X-ray, ultrasound, ECG, health consultation with a doctor, medical annual physical exams (APE), pre-employment medicals and home service blood extraction.',
+  },
+  {
+    q: 'Do you offer home service blood extraction?',
+    a: 'Yes. Message our Facebook page or call 0966 143 9944 with the tests you need and your address, and we will confirm a schedule and whether your area is covered.',
+  },
+  {
+    q: 'How much is a pre-employment medical or APE?',
+    a: 'Our Student Package starts at ₱500, the Medical Annual Physical Exam package is ₱750, and the Teachers Package for DepEd and licensed teachers is ₱3,000. See the Packages and Price list sections for what each includes.',
+  },
+  {
+    q: 'Do I need to fast before my blood test?',
+    a: 'Some tests, such as fasting blood sugar (FBS) and lipid profile, usually need fasting. Message or call us before your visit and we will tell you exactly how to prepare.',
+  },
+];
+
+const AREAS = ['San Jose del Monte', 'Graceville', 'Muzon', 'Tungkong Mangga', 'Sapang Palay', 'Norzagaray', 'Santa Maria', 'Marilao', 'Meycauayan', 'North Caloocan', 'Fairview & Lagro, QC'];
 
 const HEADLINE = 'Clear answers for your health, right here in Bulacan.';
 
@@ -385,6 +415,7 @@ export default function App() {
           .from('.hero-ring', { scale: 0.7, opacity: 0, duration: 2 }, 0.3)
           .from('.hero-chip', { y: 30, scale: 0.85, opacity: 0, duration: 1.2, stagger: 0.12, ease: 'back.out(1.8)' }, 1.3)
           .from('.hero-stage [data-pop]', { scale: 0.6, opacity: 0, y: 12, duration: 0.9, ease: 'back.out(2.2)', transformOrigin: '50% 100%' }, 1.6);
+        document.documentElement.classList.remove('pre-anim');
 
         /* ── Hero → bento card as you scroll ── */
         gsap
@@ -483,6 +514,7 @@ export default function App() {
         };
       });
     }, rootRef);
+    document.documentElement.classList.remove('pre-anim');
 
     // Re-measure once fonts/images settle
     const refresh = () => ScrollTrigger.refresh();
@@ -622,7 +654,7 @@ export default function App() {
                   </h1>
 
                   <p className="hero-sub max-w-[520px] text-lg leading-relaxed text-[#3d4b63] sm:text-[19px]">
-                    Clarity is a diagnostic clinic and laboratory in San Jose del Monte, Bulacan — lab tests, X-ray, ultrasound and ECG, check-ups and pre-employment medicals, plus home blood extraction when you can't come to us.
+                    Clarity is a medical and diagnostic clinic in San Jose del Monte, Bulacan — laboratory tests, X-ray, ultrasound and ECG, check-ups and pre-employment medicals, plus home blood extraction when you can't come to us.
                   </p>
 
                   <div className="hero-cta flex flex-wrap gap-3">
@@ -904,6 +936,44 @@ export default function App() {
                   </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Areas + FAQ ── */}
+        <section id="faq" className="bg-[#f4f8fc]">
+          <div className="mx-auto max-w-[1200px] px-5 py-24 sm:px-6">
+            <div className="flex flex-wrap gap-10">
+              <div data-reveal className="flex min-w-0 flex-[1_1_360px] flex-col gap-5">
+                <div className={EYEBROW}>MEDICAL &amp; DIAGNOSTIC CLINIC IN BULACAN</div>
+                <h2 className={H2}>Your neighborhood clinic in San Jose del Monte</h2>
+                <p className="text-base leading-relaxed text-[#3d4b63]">
+                  Clarity Diagnostics and Medical Services is a medical clinic and diagnostic laboratory in Graceville, San Jose del Monte, Bulacan. Patients come to us for laboratory tests, X-ray, ultrasound, ECG, doctor's consultations, APE and pre-employment medicals — all in one visit, without the trip to Manila.
+                </p>
+                <div>
+                  <div className="mb-3 text-sm font-extrabold text-[#16336b]">Convenient for patients from</div>
+                  <ul data-stagger className="flex flex-wrap gap-2">
+                    {AREAS.map((a) => (
+                      <li key={a} className="rounded-full border border-[#c9d8ee] bg-white px-3.5 py-1.5 text-sm font-bold text-[#16336b]">{a}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="min-w-0 flex-[999_1_560px]">
+                <h2 data-reveal className="mb-5 font-[Montserrat,sans-serif] text-2xl font-extrabold text-[#16336b]">Frequently asked questions</h2>
+                <div data-stagger className="flex flex-col gap-3">
+                  {FAQS.map((f) => (
+                    <details key={f.q} className="group rounded-[20px] border border-[#e3ebf5] bg-white px-5 py-4 open:shadow-[0_10px_30px_-16px_rgba(22,51,107,0.35)]">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[17px] font-bold text-[#16336b] [&::-webkit-details-marker]:hidden">
+                        <h3 className="font-[inherit] text-[inherit]">{f.q}</h3>
+                        <span aria-hidden="true" className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[#eef4fc] text-xl leading-none text-[#1e5bbf] transition-transform duration-300 group-open:rotate-45">+</span>
+                      </summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-[#3d4b63]">{f.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
